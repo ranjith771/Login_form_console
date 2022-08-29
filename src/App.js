@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Input from "./Input.css";
+const App = () => {
 
-function App() {
+  const [values,setValues]=useState({
+    fullname :"",
+    password :"",
+    email :"",
+});
+
+  const changeHandler = (event) => {
+    setValues({
+      ...values,
+      [event.target.name] : event.target.value,
+  });
+  }
+
+  const SubmitButton = (event) => {
+    event.preventDefault();
+    console.log(values);
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <div className="Input">
+    <label>Username </label>
+      <input type='text' name="fullname" value={values.fullname} onChange={changeHandler}></input>
+      <br />
+      <label>Password</label>
+      <input type='password' name="password" value={values.password} onChange={changeHandler}></input>
+      <br />
+     <label>Email</label>
+      <input  type='email' name="email" value={values.email} onChange={changeHandler}></input>
+      <br />
+      <button className="button-press"  type="submit" onClick={SubmitButton}>submit</button>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
